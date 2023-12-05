@@ -1,0 +1,14 @@
+int timeTakenToMail(string keyboard, string s) {
+    //    Write your code here
+    int pointer = 0;
+    int ans = 0;
+    for(int i=0; i<s.size(); i++){
+        for(int j=0; j<keyboard.size(); j++){
+            if(s[i] == keyboard[j]){    
+                ans += abs(j-pointer);
+                pointer = j;
+            }
+        }
+    }
+    return ans;
+}
