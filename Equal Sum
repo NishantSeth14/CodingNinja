@@ -1,0 +1,14 @@
+#include <bits/stdc++.h> 
+int equalSum(vector<int> token)
+{
+    int totalSum = accumulate(token.begin(), token.end(), 0);
+    int leftSum = 0;
+    for(int i=0; i<token.size(); i++){
+        totalSum -= token[i];
+        if(leftSum == totalSum){
+            return i;
+        } 
+        leftSum += token[i];
+    }  
+    return -1;
+}
