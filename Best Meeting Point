@@ -1,0 +1,39 @@
+#include <bits/stdc++.h> 
+int findBestMeetingPoint(vector<vector<int>> &mat)
+{
+     
+     int rowSize = mat.size();
+     int colSize = mat[0].size();
+
+     vector<int> xcor; 
+     for(int i=0; i<rowSize; i++){
+          for(int j=0; j<colSize; j++){
+               if(mat[i][j] == 1){
+                    xcor.push_back(i);
+               }
+          }
+     }
+
+     vector<int> ycor;
+     for(int i=0; i<colSize; i++){
+          for(int j=0; j<rowSize; j++){
+               if(mat[j][i] == 1){
+                    ycor.push_back(i);
+               }
+          }
+     }
+     int x = xcor[xcor.size()/2];
+     int y = ycor[ycor.size()/2];
+
+     int dist = 0;
+     for(int xval : xcor){
+          dist += abs(x-xval);
+     }
+     for(int yval : ycor){
+          dist += abs(y-yval);
+     }
+
+     return dist;
+
+}
+
