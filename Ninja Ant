@@ -1,0 +1,72 @@
+#include <bits/stdc++.h> 
+vector<int> ninjaAnt(vector<vector<int>> &mat, int sr, int sc, int moves) 
+{
+	char dir = 'E';
+	int n = mat.size();
+
+	while(sr >= 0 && sr < n && sc >=0 && sc < n && moves){
+		moves--;
+		if(mat[sr][sc] == 1){
+			mat[sr][sc] = 0;
+
+			if(dir == 'E'){
+				dir = 'S';
+				sr = sr+1;
+			}
+			else if(dir == 'S'){
+				dir = 'W';
+				sc = sc-1;
+			}
+			else if(dir == 'W'){
+				dir = 'N';
+				sr = sr-1;
+			}
+			else if(dir == 'N'){
+				dir = 'E';
+				sc = sc + 1;
+			}
+		}
+		else{
+			mat[sr][sc] = 1;
+
+			if(dir == 'E'){
+				dir = 'N';
+				sr = sr-1;
+			}
+			else if(dir == 'W'){
+				dir = 'S';
+				sr = sr+1;
+			}
+			else if(dir == 'N'){
+				dir = 'W';
+				sc = sc-1;
+			}
+			else if(dir == 'S'){
+				dir = 'E';
+				sc = sc + 1;
+			}
+		}
+	}
+	if(sr < 0 || sr >= n || sc < 0 || sc >= n){
+		return{-1,-1};
+	}
+	return {sr,sc};
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
