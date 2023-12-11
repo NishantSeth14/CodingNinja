@@ -1,0 +1,14 @@
+#include <bits/stdc++.h> 
+int shakeHands(vector<int> &friends ,int n, int k)
+{
+    int happiness = k;
+
+    for(int i=0; i<friends.size(); i++){
+        if(friends[i] == happiness){
+            happiness += friends[i];
+        }
+        
+    }
+
+    return happiness;
+}
