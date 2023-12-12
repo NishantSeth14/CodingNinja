@@ -1,0 +1,30 @@
+#include <bits/stdc++.h> 
+vector<int> findSubmatrixSum(vector<vector<int>> &arr, vector<vector<int>> &queries) 
+{
+    vector<int> ans;
+
+    int n = arr.size();
+    int m = arr[0].size();
+    int qn = queries.size();
+    int qm = queries[0].size();
+
+    for (int i = 0; i < qn; i++) {
+        int lefttoprow = queries[i][0];
+        int lefttopcal = queries[i][1];
+        int rightbottomrow = queries[i][2];
+        int rightbottomcal = queries[i][3];
+
+        int sum = 0;
+
+        for (int row = lefttoprow; row <= rightbottomrow; row++) {
+            for (int cal = lefttopcal; cal <= rightbottomcal; cal++) {
+                sum += arr[row][cal];
+            }
+        }
+
+        ans.push_back(sum);
+    }
+
+    return ans;
+
+}
