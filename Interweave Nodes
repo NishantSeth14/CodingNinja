@@ -1,0 +1,198 @@
+#include <bits/stdc++.h> 
+/********************************************************
+
+    Following is the class structure of the Node class:
+    
+    class Node
+    {
+    	public:
+    	    int data;
+    	    Node *next;
+    	    Node(int data)
+    	    {
+    	        this->data = data;
+    	        this->next = NULL;
+    	    }
+    };
+
+********************************************************/
+
+/*
+
+Time Complexity: O(N1 + N2)
+
+Space Complexity: O(1)
+
+Where N1 and N2 denote the length of linked lists 1 and 2 respectively.
+
+*/
+
+vector<Node *> interweaveNodes(Node *head1, Node *head2) {
+
+    vector<Node *> answer;
+
+    // If both the nodes are NULL.
+
+    if (head1 == NULL && head2 == NULL) {
+
+        answer.push_back(head1);
+
+        answer.push_back(head2);
+
+        // No change in answer.
+
+        return answer;
+
+    }
+
+    Node *temp1 = head1, *temp2 = head2, *tempNext = NULL;
+
+    // If length of the first linked list is zero.
+
+    if (head1 == NULL) {
+
+        // Create a dummy node.
+
+        Node *newHead1 = new Node(0);
+
+        temp1 = newHead1;
+
+        // While the end of linked list 2.
+
+        while (temp2 != NULL && temp2->next != NULL) {
+
+            // Use tempNext to keep track of the next node.
+
+            tempNext = temp2->next;
+
+            temp1->next = tempNext;
+
+            temp2->next = tempNext->next;
+
+            temp1 = temp1->next;
+
+            temp2 = temp2->next;
+
+        }
+
+        // Move from the dummy node.
+
+        head1 = newHead1->next;
+
+        temp1->next = NULL;
+
+    }
+
+    // If length of the second linked list is zero.
+
+    else if (head2 == NULL) {
+
+        // Create a dummy node.
+
+        Node *newhead2 = new Node(0);
+
+        temp2 = newhead2;
+
+        // While the end of linked list 1.
+
+        while (temp1 != NULL && temp1->next != NULL) {
+
+            // Use tempNext to keep track of the next node.
+
+            tempNext = temp1->next;
+
+            temp2->next = tempNext;
+
+            temp1->next = tempNext->next;
+
+            temp1 = temp1->next;
+
+            temp2 = temp2->next;
+
+        }
+
+        // Move from the dummy node.
+
+        head2 = newhead2->next;
+
+        temp2->next = NULL;
+
+    } else {
+
+        while (temp1->next != NULL && temp2->next != NULL) {
+
+            // Use tempNext to keep track of the next node.
+
+            tempNext = temp1->next;
+
+            temp1->next = temp2->next;
+
+            temp2->next = tempNext;
+
+            temp1 = temp1->next;
+
+            temp2 = temp2->next;
+
+        }
+
+        // If the first linked list is finished.
+
+        if (temp1->next == NULL) {
+
+            // Continue with the nodes of the second linked list.
+
+            while (temp2 != NULL && temp2->next != NULL) {
+
+                tempNext = temp2->next;
+
+                temp1->next = tempNext;
+
+                temp2->next = tempNext->next;
+
+                temp1 = temp1->next;
+
+                temp2 = temp2->next;
+
+            }
+
+            temp1->next = NULL;
+
+        }
+
+        // If the second linked list is finished.
+
+        else {
+
+            // Continue with the nodes of the first linked list.
+
+            while (temp1 != NULL && temp1->next != NULL) {
+
+                tempNext = temp1->next;
+
+                temp2->next = tempNext;
+
+                temp1->next = tempNext->next;
+
+                temp1 = temp1->next;
+
+                temp2 = temp2->next;
+
+            }
+
+            temp2->next = NULL;
+
+        }
+
+    }
+
+    // Add head pointers to the vector.
+
+    answer.push_back(head1);
+
+    answer.push_back(head2);
+
+    // Return the answer.
+
+    return answer;
+
+}
