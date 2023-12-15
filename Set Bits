@@ -1,0 +1,32 @@
+#include <bits/stdc++.h> 
+#include <iostream>
+
+using namespace std;
+
+int countBits(int n){
+    int binaryNumber = 0; 
+    int i = 1;
+
+    while(n != 0){
+        int remainder = n % 2;
+        n = n/2;
+        binaryNumber = binaryNumber + remainder * i;
+        i = i * 10;
+    }
+    int count = 0;
+    while(binaryNumber != 0){
+        int digit = binaryNumber%10;
+        if(digit == 1){
+            count++;
+        } 
+        binaryNumber /= 10;
+    }
+    return count;
+}
+
+int main() {
+    int n;
+    cin >> n;
+    cout<<countBits(n);
+    return 0;
+}
