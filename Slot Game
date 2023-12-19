@@ -1,0 +1,38 @@
+#include <bits/stdc++.h> 
+int slotScoreHelper(char c) {
+    if (c == 'B') {
+        return 0;
+    }
+    if (c == 'G') {
+        return 1;
+    }
+    if (c == 'R') {
+        return 2;
+    }
+    return 3;
+}
+
+int slotScore(std::string &original, std::string &guess) {
+    int points = 0;
+    int count[4] = {0};
+
+    for (int i = 0; i < 4; i++) {
+        if (original[i] == guess[i]) {
+            points += 2;
+        } else {
+            int color = slotScoreHelper(original[i]);
+            count[color]++;
+        }
+    }
+
+    for (int i = 0; i < 4; i++) {
+        int color = slotScoreHelper(guess[i]);
+
+        if (count[color] > 0 && guess[i] != original[i]) {
+            points++;
+            count[color]--;
+        }
+    }
+
+    return points;
+}
