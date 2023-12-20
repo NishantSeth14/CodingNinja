@@ -1,0 +1,11 @@
+#include<algorithm>
+
+bool isPalindrome(string &s)
+{
+	string s1 = s;
+	reverse(s.begin(), s.end());
+	if(s == s1){
+		return true;
+	}
+	return false;
+}
