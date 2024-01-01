@@ -1,0 +1,59 @@
+/************************************************************
+
+    Following is the Binary Tree node class:
+        
+    template <typename T = int>
+    class TreeNode
+    {
+        public:
+        T data;
+        TreeNode<T> *left;
+        TreeNode<T> *right;
+
+        TreeNode(T val)
+        {
+            this->data = val;
+            left = NULL;
+            right = NULL;
+        }
+    };
+
+************************************************************/
+
+int constructTree(TreeNode<int> *root){
+    if(root == NULL){
+        return 0;
+    }
+    if(root->left == NULL && root->right == NULL){
+        int sum = root->data;
+        root->data = 0;
+        return sum;
+    }
+    int left = constructTree(root->left);
+    int right = constructTree(root->right);
+    int sum = left+right;
+    int temp = root->data;
+    root->data = sum;
+    sum+=temp;
+    return sum;
+}
+TreeNode<int> *convertToSumTree(TreeNode<int> *root) {
+    constructTree(root);
+    return root;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
