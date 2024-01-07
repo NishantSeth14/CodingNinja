@@ -1,0 +1,21 @@
+#include <unordered_map>
+
+int findUnique(int *arr, int size)
+{
+    std::unordered_map<int, int> mp;
+
+    for (int i = 0; i < size; i++)
+    {
+        mp[arr[i]]++;
+    }
+
+    for (auto it = mp.begin(); it != mp.end(); it++)
+    {
+        if (it->second == 1)
+        {
+            return it->first;
+        }
+    }
+
+    return 0;
+}
