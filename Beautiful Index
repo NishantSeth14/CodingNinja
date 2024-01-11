@@ -1,0 +1,16 @@
+#include <bits/stdc++.h> 
+int beautifulIndex(int N, vector<int> A)
+{
+	int ans = -1;
+	long long suffixSum = accumulate(A.begin(), A.end(), 0);
+	long long prefix = 0;
+	for(int i=0; i<N; i++){
+		suffixSum -= A[i];
+		if(prefix == suffixSum){
+			ans = i+1;
+			break;
+		}
+		prefix += A[i];
+	}
+	return ans;
+}
